@@ -1,17 +1,22 @@
 import React from 'react'
 import {Home} from './home/Home'
-import {Provider} from 'react-redux';
-import {rootReducers} from './reducers'
-import {createStore} from 'redux';
-const store= createStore(rootReducers)
+import {Provider} from 'react-redux'
+import {configureStore} from './configureStore'
+import {
+    BrowserRouter as Router, Route
+} from 'react-router-dom'
+import {PokemonDetail} from './home/components/components/pokemon-detail/PokemonDetail'
 
 function App() {
     return (
-        <Provider store={store}>
-            <div className="App">
-                <Home/>
-            </div>
-        </Provider>
+        <Router>
+            <Provider store={configureStore()}>
+                <div className="App">
+                    <Route path='/' component={Home} exact={true}/>
+                    <Route path='/:id' component={PokemonDetail} exact={true}/>
+                </div>
+            </Provider>
+        </Router>
     )
 }
 
