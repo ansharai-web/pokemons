@@ -131,11 +131,11 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
     // @ts-ignore
     const currPokemon = pokemonDetail[id]
 
-
-    /* // TODO BETTER IMPLEMENTATION
+    console.log(currPokemon,'currPokemon')
+     // TODO BETTER IMPLEMENTATION
         if(!currPokemon){
             return <h2>No pokemon Details Available</h2>
-        }*/
+        }
 
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
@@ -144,33 +144,32 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
                     <PokemonCardHeader>
                         <PokemonHeaderLeft>
                             <PokemonBadge>basic</PokemonBadge>
-                            <PokemonName>Pikachu</PokemonName>
+                            <PokemonName>{currPokemon.name}</PokemonName>
                         </PokemonHeaderLeft>
                         <div style={{marginRight: '20px'}}>
-                            <PokemonLifeText>HP</PokemonLifeText><PokemonLifeValue>60</PokemonLifeValue> %
+                            <PokemonLifeText>HP</PokemonLifeText><PokemonLifeValue>60</PokemonLifeValue> &#10084;
                         </div>
                     </PokemonCardHeader>
                     <PokemonImage>
                         <img src={Example} alt={'pokemon detail '} width={'100%'} height='100%'/>
                     </PokemonImage>
                     <PokomenInformation>
-                        No 025 Mouse Pokemon HT 104 wt 13.2lbs
+                        {currPokemon.name} weight: {currPokemon.weight} lbs, height: {currPokemon.height} inches
                     </PokomenInformation>
                     <div style={{marginTop:'5%', marginLeft:'3%'}}>
-                            <Badge backgroundColor=' #C6D3E6' badgeColor='#505E67'>BADGE</Badge>
-                            <Badge backgroundColor=' #C6D3E6' badgeColor='#505E67'>BADGE</Badge>
+                        {currPokemon.types.map((type: any, index: number) => {
+                           return  <Badge backgroundColor=' #C6D3E6' badgeColor='#505E67' key={`type_${type.name}_${index}`}>{type.type.name || ''}</Badge>
+                        })}
                     </div>
                     <div>
                         <PokemonStats>
-                            <Badge>Pikachu Stats</Badge>
+                            <Badge backgroundColor=' #C6D3E6' badgeColor='#505E67' >{currPokemon.name} Stats</Badge>
                         </PokemonStats>
                         <TwoColumnOrderedList>
-                            <li> hp: 45</li>
-                            <li> attack 45</li>
-                            <li> defense :45</li>
-                            <li> special-attack</li>
-                            <li> special-defense</li>
-                            <li> speed</li>
+                            {currPokemon.stats.map((detail: any, index: number ) => {
+                               return  <li key={`stats_${detail.stat.name}_${index}`}> {detail.stat.name}: {detail.base_stat}</li>
+                            })}
+
                         </TwoColumnOrderedList>
                     </div>
                 </InnerPokemonDetailCard>
