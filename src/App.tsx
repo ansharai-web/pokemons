@@ -11,7 +11,7 @@ function App() {
     return (
         <Router>
             <Provider store={configureStore()}>
-                <div className="App">
+                <div >
                     <Route path='/' component={Home} exact={true}/>
                     <Route path='/:id' component={PokemonDetail} exact={true}/>
                 </div>

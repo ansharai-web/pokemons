@@ -79,6 +79,7 @@ export interface IPokemonSpirites {
         }
     }
     versions: any // The api interface may change for each pokemon
+    [key: string] : any
 }
 
 export interface IPokemonStats {

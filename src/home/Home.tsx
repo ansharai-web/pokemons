@@ -2,13 +2,14 @@ import * as React from 'react'
 import {ChangeEvent} from 'react'
 import {PokemonList} from './components/components/PokemonList'
 import {useFetchPokemons} from './fetch-pokemons'
+import { LoadingCard } from './components/components/components/LoadingCard'
 
 interface IHomeProps {
 }
 
 const HomeFC: React.FC<IHomeProps> = () => {
     // The logc for fetching the pokemon list is contained into this hook
-    useFetchPokemons()
+    const {loading,errored} =useFetchPokemons()
 
     const handlePokemonChange = (e: ChangeEvent<HTMLInputElement>) => {
         console.log('POKEMON', e.target.value)
@@ -18,7 +19,7 @@ const HomeFC: React.FC<IHomeProps> = () => {
         <>
             <div>
                 <input type='search' placeholder='Filter pokemons' onChange={handlePokemonChange}/>
-                <PokemonList/>
+                <PokemonList loading={loading} errored={errored} />
             </div>
         </>
     )

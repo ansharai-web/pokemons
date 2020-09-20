@@ -15,8 +15,7 @@ const Filledbar = styled.div`
     background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
     transition: 0.6s ease-out;
 `
-
-const rotate = keyframes`
+ const rotate = keyframes`
     from{
         transform: rotate(0deg)
     }
@@ -35,20 +34,20 @@ const CardImageContainer = styled.div`
 `
 
 
-const StyledCard = styled.div`
+export const StyledCard = styled.div`
 display: flex;
 height: 280px;
-width: 200px;
+width: 220px;
 background-color: #17141d;
 border-radius:10px;
 box-shadow: -1rem 0 3rem #000;
 transition: 0.4s ease-out;
 position:relative;
-margin: 10px 10px;
-
+margin: 10px 20px;
+opacity: 0.7;
 &:hover {
 transform: translateY(-20px);
-
+opacity: 1;
 }
   &:hover ${Filledbar} {
     width:120px;
