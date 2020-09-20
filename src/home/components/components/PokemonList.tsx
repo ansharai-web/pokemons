@@ -4,6 +4,7 @@ import {filteredPokemonListByNameSelector} from '../../redux/home.reducers'
 import {Card} from './components/Card'
 import {LoadingCard} from './components/LoadingCard'
 import {useScroll} from '../../../utils'
+import {SearchPokemonInput} from './pokemon-detail/components/SearchPokemonInput'
 
 interface IPokemonListProps {
     loading: boolean
@@ -26,10 +27,14 @@ const PokemonListFC: React.FC<IPokemonListProps> = ({loading, errored}) => {
         key={`loading_card_${index}`}/>)
     const cardList = pokemonList.slice(0, currentItemesNumber).map((pokemon, index) => <Card key={index} {...pokemon}/>)
     const notFoundOrError = <h3>{errored ? errorMessage : noItemsFoundMessage}</h3>
+
+
     return (
-        <>
+        <div>
+            <SearchPokemonInput/>
 
             <div style={{display: 'flex', flexWrap: 'wrap', width: '1200px', margin: 'auto'}}>
+
                 {
                     loading ?
                         loadingCardList : pokemonList.length > 0 ?
@@ -37,7 +42,7 @@ const PokemonListFC: React.FC<IPokemonListProps> = ({loading, errored}) => {
             </div>
 
 
-        </>
+        </div>
     )
 }
 

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled, {keyframes} from 'styled-components'
-import  Pokemon_Ball from '../../../../assets/img/pokemon_ball.png'
+import Pokemon_Ball from '../../../../assets/img/pokemon_ball.png'
 import {Link} from 'react-router-dom'
 import {savePokemonDetailAction} from '../pokemon-detail/redux/pokemonDetail.actions'
 import {useDispatch} from 'react-redux'
@@ -15,7 +15,7 @@ const Filledbar = styled.div`
     background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
     transition: 0.6s ease-out;
 `
- const rotate = keyframes`
+const rotate = keyframes`
     from{
         transform: rotate(0deg)
     }
@@ -89,8 +89,6 @@ const CardLink = styled(Link)`
  `
 
 
-
-
 interface ICardProps {
     name: string
     url: string
@@ -98,15 +96,20 @@ interface ICardProps {
 
 
 const CardFC: React.FC<ICardProps> = ({name, url}) => {
-    const dispatch = useDispatch();
-
+    const dispatch = useDispatch()
     const fetchPokemonDetail = async () => {
-            const pokemonDetail = await fetch(url)
-        return pokemonDetail.json()
+        const pokemonDetail = await fetch(url)
+
+
+        pokemonDetail.json().then(data => {
+            dispatch(savePokemonDetailAction(data))
+        })
+
     }
 //TODO FIX INTERFACE
-    const handlePokemonDetail = async (e:  any) => {
-        fetchPokemonDetail().then(data => dispatch(savePokemonDetailAction(data)))
+    const handlePokemonDetail = async (e: any) => {
+
+        fetchPokemonDetail()
         //Logic
 
     }

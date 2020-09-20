@@ -1,6 +1,5 @@
 import * as React from 'react'
-import {useState} from 'react'
-import {useParams} from 'react-router-dom'
+import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {IPartialPokemonDetails, pokemonDetailSelector} from './redux/pokemonDetail.reducers'
 import styled from 'styled-components'
@@ -9,6 +8,7 @@ import {PokemonPhotosGallery} from './components/PokemonPhotosGallery'
 import {PokemonShowGalleryButton} from './components/PokemonShowGalleryButton'
 import {PokemonTypes} from './components/PokemonTypes'
 import {PokemonInfo} from './components/PokemonInfo'
+import {useHistory, useParams} from 'react-router-dom'
 
 interface IPokemonDetailProps {
 }
@@ -104,14 +104,30 @@ justify-content:center;
 const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
     const params: any = useParams()
     const pokemonDetail: any = useSelector(pokemonDetailSelector)
-    const [showGallery, setShowGallery] = useState(false)
+    const history = useHistory()
     const id: string = params.id
-
     const currPokemon: IPartialPokemonDetails = pokemonDetail[id]
+    const [showGallery, setShowGallery] = useState(false)
+    const [time, setTime] = useState(5)
+    useEffect(() => {
+        let temp: any
+        if (time === 0) {
+            history.push('/')
+        }
+        if (!currPokemon) {
+            temp = setInterval(() => setTime((prevTime) => prevTime - 1), 1000)
+        }
+        return () => {
+
+            temp && clearInterval(temp)
+        }
+    }, [currPokemon, history, time])
+
 
     // TODO BETTER IMPLEMENTATION
     if (!currPokemon) {
-        return <h2>No pokemon Details Available</h2>
+        return <h1 style={{textAlign: 'center', color: '#fff', fontSize: '50px'}}>No pokemon Details Available. You will
+            be redirected to the main page in {time} </h1>
     }
 
     return (
