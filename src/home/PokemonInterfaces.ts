@@ -105,6 +105,4 @@ export interface IPokemon {
     url: string
 }
 
-export interface IPokemonDetailMapper {
-    [key: string]: IPokemonDetail
-}
+

@@ -32,6 +32,7 @@ export const useFetchPokemons = () => {
     }, [dispatch, fetchPokemons])
     return{
         loading,
-        errored
+        errored,
+        dispatch
     }
 }

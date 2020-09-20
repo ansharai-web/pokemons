@@ -2,26 +2,25 @@ import * as React from 'react'
 import {ChangeEvent} from 'react'
 import {PokemonList} from './components/components/PokemonList'
 import {useFetchPokemons} from './fetch-pokemons'
-import { LoadingCard } from './components/components/components/LoadingCard'
+import {searchPokemonAction} from './redux/home.actions'
+import {useDispatch} from 'react-redux'
 
 interface IHomeProps {
 }
 
 const HomeFC: React.FC<IHomeProps> = () => {
-    // The logc for fetching the pokemon list is contained into this hook
-    const {loading,errored} =useFetchPokemons()
-
+    // The logic for fetching the pokemon list is contained into this hook
+    const {loading, errored} = useFetchPokemons()
+    const dispatch = useDispatch()
     const handlePokemonChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log('POKEMON', e.target.value)
-        // TODO LOGIC
+        console.log(e.target.value,)
+        dispatch(searchPokemonAction(e.target.value))
+
     }
-    return (
-        <>
-            <div>
-                <input type='search' placeholder='Filter pokemons' onChange={handlePokemonChange}/>
-                <PokemonList loading={loading} errored={errored} />
-            </div>
-        </>
+    return (<div>
+            <input type='search' placeholder='Filter pokemons' onChange={handlePokemonChange}/>
+            <PokemonList loading={loading} errored={errored}/>
+        </div>
     )
 }
 

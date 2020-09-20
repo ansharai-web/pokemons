@@ -1,11 +1,14 @@
 import * as React from 'react'
+import {useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {useSelector} from 'react-redux'
-import {pokemonDetailSelector} from './redux/pokemonDetail.reducers'
-import styled, {keyframes} from 'styled-components'
+import {IPartialPokemonDetails, pokemonDetailSelector} from './redux/pokemonDetail.reducers'
+import styled from 'styled-components'
 import Example from '../../../../assets/img/pokemon_ball.png'
-import {useState} from 'react'
-import PokemonBall from '../../../../assets/img/pokemon_ball.png'
+import {PokemonPhotosGallery} from './components/PokemonPhotosGallery'
+import {PokemonShowGalleryButton} from './components/PokemonShowGalleryButton'
+import {PokemonTypes} from './components/PokemonTypes'
+import {PokemonInfo} from './components/PokemonInfo'
 
 interface IPokemonDetailProps {
 }
@@ -97,76 +100,15 @@ display: flex;
 justify-content:center;
 `
 
-interface IBadgeProps {
-    badgeColor?: string
-    backgroundColor?: string
-    badgeTransform?: string
 
-}
-
-const Badge = styled.span`
-margin-left:3px;
-    display: inline-block;
-    padding: .25em .4em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25rem;
-    color: ${(props: IBadgeProps) => props.badgeColor || 'white'};
-    background-color: ${(props: IBadgeProps) => props.backgroundColor || 'black'};
-    text-transform:${(props: IBadgeProps) => props.badgeTransform || 'none'};
-   
-`
-const TwoColumnOrderedList = styled.ul`
-    -webkit-columns: 2;
-    -moz-columns: 2;
-    columns: 2;
-    `
-const PokemonStats = styled.p`
-margin: 0;
-    padding: 0;
-    text-align: center;
-`
-
-const fadeIn = keyframes`
-from{opacity:0}
-to{opacity:1}
-`
-const PokemonPhotos = styled.section`
-    width: 1000px;
-    height:600px;
-    display:flex;
-    margin-left:50px;
-    flex-wrap: wrap;
-    overflow: auto;
-    background-color:rgba(0,0,0, .6);
-    animation: ${fadeIn} 2s ease-in;
-    & img {
-    width: 100%;
-    height: 100%;
-    }
-  
-`
-const ShowGalleryPokemonButton = styled.button`
-border-radius: 10px;
-    text-transform: uppercase;
-    padding-left: 10px;
-    padding-right: 10px;
-    display: flex;
-    align-items: center;
-`
 const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
     const params: any = useParams()
-    const pokemonDetail = useSelector(pokemonDetailSelector)
+    const pokemonDetail: any = useSelector(pokemonDetailSelector)
     const [showGallery, setShowGallery] = useState(false)
     const id: string = params.id
-    // @ts-ignore
-    const currPokemon = pokemonDetail[id]
 
-    console.log(currPokemon, 'currPokemon')
+    const currPokemon: IPartialPokemonDetails = pokemonDetail[id]
+
     // TODO BETTER IMPLEMENTATION
     if (!currPokemon) {
         return <h2>No pokemon Details Available</h2>
@@ -191,46 +133,14 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
                     <PokomenInformation>
                         {currPokemon.name} weight: {currPokemon.weight} lbs, height: {currPokemon.height} inches
                     </PokomenInformation>
-                    <div style={{marginTop: '5%', marginLeft: '3%'}}>
-                        {currPokemon.types.map((type: any, index: number) => {
-                            return <Badge
-                                backgroundColor=' #C6D3E6'
-                                badgeColor='#505E67'
-                                badgeTransform='capitalize'
-                                key={`type_${type.name}_${index}`}>{type.type.name || ''}</Badge>
-                        })}
-                    </div>
-                    <div>
-                        <PokemonStats>
-                            <Badge backgroundColor=' #C6D3E6' badgeColor='#505E67'
-                                   badgeTransform='uppercase'>{currPokemon.name} Stats</Badge>
-                        </PokemonStats>
-                        <TwoColumnOrderedList>
-                            {currPokemon.stats.map((detail: any, index: number) => {
-                                return <li
-                                    key={`stats_${detail.stat.name}_${index}`}> {detail.stat.name}: {detail.base_stat}</li>
-                            })}
+                    <PokemonTypes types={currPokemon.types}/>
+                    <PokemonInfo stats={currPokemon.stats} name={currPokemon.name}/>
+                    <PokemonShowGalleryButton handleGallery={() => setShowGallery(true)}/>
 
-                        </TwoColumnOrderedList>
-                    </div>
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <ShowGalleryPokemonButton onClick={() => setShowGallery(true)}>Show
-                            Gallery
-                            <img src={PokemonBall} alt="pokemon ball" width={20}/>
-                        </ShowGalleryPokemonButton>
-                    </div>
 
                 </InnerPokemonDetailCard>
             </PokemonDetailCard>
-            {showGallery && <PokemonPhotos>
-                {currPokemon?.sprites.map((img: string, index: string) =>
-                    <div style={{width: '150px', height: '70px', margin: '5px'}}>
-                        <img src={img}
-                             key={`${currPokemon.name}_image_${index}`}
-                             alt={`${currPokemon.name}_image_${index}`}/>
-                    </div>
-                )}
-            </PokemonPhotos>}
+            {showGallery && <PokemonPhotosGallery sprites={currPokemon.sprites} name={currPokemon.name}/>}
         </div>
     )
 }
