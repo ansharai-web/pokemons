@@ -11,8 +11,6 @@ margin: 0;
     text-align: center;
 `
 
-
-//TODO FIX INTERFACE
 interface IPokemonInfoProps {
     stats: IPokemonStats[]
     name: string

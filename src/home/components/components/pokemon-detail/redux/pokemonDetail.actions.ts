@@ -1,5 +1,6 @@
+import {IPokemonDetailReducer} from './pokemonDetail.reducers'
 
 export const SAVE_POKEMON_DETAIL = 'SAVE_POKEMON_DETAIL'
 
-// todo add interface
-export const savePokemonDetailAction = (pokemonDetail: any) => ({type:SAVE_POKEMON_DETAIL,payload: pokemonDetail})
+
+export const savePokemonDetailAction = (pokemonDetail: IPokemonDetailReducer) => ({type:SAVE_POKEMON_DETAIL,payload: pokemonDetail})

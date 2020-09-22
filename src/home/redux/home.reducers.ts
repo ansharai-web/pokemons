@@ -3,6 +3,7 @@ import {createSelector} from 'reselect'
 import {IAction, IHomeReducers, IRootState} from '../../reducers'
 import {IPokemon} from '../PokemonInterfaces'
 
+
 export const homeBaseSelector = (state: IRootState): IHomeReducers => state.home
 
 export const pokemonListReducer = (state: IPokemon[] = [], action: IAction): IPokemon[] => {
@@ -17,6 +18,8 @@ const pokemonListSelector = createSelector(
     homeBaseSelector,
     (home) => home.pokemonList
 )
+
+// SEARCHED POKEMON REDUCER
 export const searchedPokemonReducer = (state: string = '', action: IAction): string => {
     switch (action.type) {
         case SEARCH_POKEMON:

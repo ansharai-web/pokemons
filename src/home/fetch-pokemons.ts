@@ -36,7 +36,6 @@ export const useFetchPokemons = () => {
     },[dispatch])
 
     useEffect(() => {
-        //TODO ADD LOGIC IF DATA IS ALREADY PRESENT
         fetchPokemons()
     }, [dispatch, fetchPokemons])
     return{

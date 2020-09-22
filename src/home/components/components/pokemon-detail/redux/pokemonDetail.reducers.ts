@@ -18,7 +18,6 @@ export interface IPartialPokemonDetails {
     height: number
 }
 
-// todo fix naming ?
 export interface IPokemonDetailReducer {
     [key: string]: IPartialPokemonDetails
 }
