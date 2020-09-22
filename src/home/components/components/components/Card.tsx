@@ -4,6 +4,7 @@ import Pokemon_Ball from '../../../../assets/img/pokemon_ball.png'
 import {Link} from 'react-router-dom'
 import {savePokemonDetailAction} from '../pokemon-detail/redux/pokemonDetail.actions'
 import {useDispatch} from 'react-redux'
+import {useFetchPokemonDetail} from './fetch-pokemon-detail'
 
 const Filledbar = styled.div`
     position: absolute;
@@ -96,23 +97,7 @@ interface ICardProps {
 
 
 const CardFC: React.FC<ICardProps> = ({name, url}) => {
-    const dispatch = useDispatch()
-    const fetchPokemonDetail = async () => {
-        const pokemonDetail = await fetch(url)
-
-
-        pokemonDetail.json().then(data => {
-            dispatch(savePokemonDetailAction(data))
-        })
-
-    }
-//TODO FIX INTERFACE
-    const handlePokemonDetail = async (e: any) => {
-
-        fetchPokemonDetail()
-        //Logic
-
-    }
+    const {handlePokemonDetail} = useFetchPokemonDetail(url)
 
     return (<StyledCard>
             <StyledCardTitle>{name}</StyledCardTitle>

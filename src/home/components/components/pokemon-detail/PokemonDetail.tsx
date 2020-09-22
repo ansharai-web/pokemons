@@ -9,6 +9,7 @@ import {PokemonShowGalleryButton} from './components/PokemonShowGalleryButton'
 import {PokemonTypes} from './components/PokemonTypes'
 import {PokemonInfo} from './components/PokemonInfo'
 import {Link, useHistory, useParams} from 'react-router-dom'
+import { MissingPokemon } from './MissingPokemon'
 
 interface IPokemonDetailProps {
 }
@@ -124,36 +125,14 @@ const PokemonDetailContainer = styled.div`
 const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
     const params: any = useParams()
     const pokemonDetail: any = useSelector(pokemonDetailSelector)
-    const history = useHistory()
     const id: string = params.id
     const currPokemon: IPartialPokemonDetails = pokemonDetail[id]
     const [showGallery, setShowGallery] = useState(false)
-    const [time, setTime] = useState(5)
-    useEffect(() => {
-        let temp: any
-        if (time === 0) {
-            history.push('/')
-        }
-        if (!currPokemon) {
-            temp = setInterval(() => setTime((prevTime) => prevTime - 1), 1000)
-        }
-        return () => {
-
-            temp && clearInterval(temp)
-        }
-    }, [currPokemon, history, time])
-
-
-    // TODO BETTER IMPLEMENTATION
-    if (!currPokemon) {
-        return <h1 style={{textAlign: 'center', color: '#fff', fontSize: '50px'}}>No pokemon Details Available. You will
-            be redirected to the main page in {time} </h1>
-    }
 
     return (
         <>
+        {!currPokemon ? <MissingPokemon /> :
         <PokemonDetailContainer >
-
             <PokemonDetailCard>
                 <InnerPokemonDetailCard>
                     <PokemonCardHeader>
@@ -175,12 +154,11 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
                     <PokemonInfo stats={currPokemon.stats} name={currPokemon.name}/>
                     <PokemonShowGalleryButton handleGallery={() => setShowGallery(!showGallery)} showGallery={showGallery}/>
                     <Link to='/' style={{position:'absolute', color: '#000',fontSize:'30px', bottom:'10px', left:'10px'}}>Go Back</Link>
-
                 </InnerPokemonDetailCard>
             </PokemonDetailCard>
             {showGallery && <PokemonPhotosGallery sprites={currPokemon.sprites} name={currPokemon.name}/>}
-        </PokemonDetailContainer>
-            </>
+        </PokemonDetailContainer>}
+        </>
     )
 }
 

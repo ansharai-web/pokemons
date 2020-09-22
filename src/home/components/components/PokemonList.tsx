@@ -100,9 +100,7 @@ margin: auto;
     return (
         <div>
             <SearchPokemonInput/>
-
             <ListContainer>
-
                 {
                     loading ?
                         loadingCardList : pokemonList.length > 0 ?

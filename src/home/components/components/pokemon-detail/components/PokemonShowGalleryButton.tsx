@@ -14,6 +14,7 @@ border-radius: 10px;
     padding-right: 10px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 `
 const SHOW_GALLERY_TEXT = 'Show Gallery'
 const HIDE_GALLERY_TEXT = 'Hide Gallery'
