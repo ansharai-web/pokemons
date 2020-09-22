@@ -151,7 +151,7 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
                     </PokomenInformation>
                     <PokemonTypes types={currPokemon.types}/>
                     <PokemonInfo stats={currPokemon.stats} name={currPokemon.name}/>
-                    <PokemonShowGalleryButton handleGallery={() => setShowGallery(true)}/>
+                    <PokemonShowGalleryButton handleGallery={() => setShowGallery(!showGallery)} showGallery={showGallery}/>
 
 
                 </InnerPokemonDetailCard>
