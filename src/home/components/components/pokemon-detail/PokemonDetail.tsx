@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
+import {Provider, useSelector} from 'react-redux'
 import {IPartialPokemonDetails, pokemonDetailSelector} from './redux/pokemonDetail.reducers'
 import styled from 'styled-components'
 import Example from '../../../../assets/img/pokemon_ball.png'
@@ -8,7 +8,7 @@ import {PokemonPhotosGallery} from './components/PokemonPhotosGallery'
 import {PokemonShowGalleryButton} from './components/PokemonShowGalleryButton'
 import {PokemonTypes} from './components/PokemonTypes'
 import {PokemonInfo} from './components/PokemonInfo'
-import {useHistory, useParams} from 'react-router-dom'
+import {Link, useHistory, useParams} from 'react-router-dom'
 
 interface IPokemonDetailProps {
 }
@@ -27,7 +27,16 @@ const PokemonDetailCard = styled.div`
  border:3px solid #9AA472;
  border-radius:10px;
  position: relative;
+@media (min-width: 320px) and (max-width:450px){
+width:100%;
+height:600px;
 
+
+}
+  @media (min-width: 768px) and (max-width:800px){
+  margin: auto;
+  margin-top:10px;
+  }
 
 `
 const InnerPokemonDetailCard = styled(CenterDiv)`
@@ -38,6 +47,10 @@ const InnerPokemonDetailCard = styled(CenterDiv)`
  box-shadow:3px 3px 3px 3px #8A8C4C;
  border-radius:10px;
  position: absolute;
+ @media (min-width: 320px) and (max-width:450px){
+width:95%;
+}
+
 
 `
 const PokemonCardHeader = styled.div`
@@ -99,7 +112,14 @@ background-color:gray;
 display: flex;
 justify-content:center;
 `
+const PokemonDetailContainer = styled.div`
 
+@media (min-width:900px) {
+ display: flex;
+ margin-top: 100px;
+ margin-left: 30px;
+}
+`
 
 const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
     const params: any = useParams()
@@ -131,7 +151,9 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
     }
 
     return (
-        <div style={{display: 'flex', marginTop: '100px', marginLeft: '30px'}}>
+        <>
+        <PokemonDetailContainer >
+
             <PokemonDetailCard>
                 <InnerPokemonDetailCard>
                     <PokemonCardHeader>
@@ -144,7 +166,7 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
                         </div>
                     </PokemonCardHeader>
                     <PokemonImage>
-                        <img src={Example} alt={'pokemon detail '} width={'100%'} height='100%'/>
+                        <img src={currPokemon.sprites[0]} alt={'pokemon detail '} width={'100%'} height='100%'/>
                     </PokemonImage>
                     <PokomenInformation>
                         {currPokemon.name} weight: {currPokemon.weight} lbs, height: {currPokemon.height} inches
@@ -152,12 +174,13 @@ const PokemonDetailFC: React.FC<IPokemonDetailProps> = props => {
                     <PokemonTypes types={currPokemon.types}/>
                     <PokemonInfo stats={currPokemon.stats} name={currPokemon.name}/>
                     <PokemonShowGalleryButton handleGallery={() => setShowGallery(!showGallery)} showGallery={showGallery}/>
-
+                    <Link to='/' style={{position:'absolute', color: '#000',fontSize:'30px', bottom:'10px', left:'10px'}}>Go Back</Link>
 
                 </InnerPokemonDetailCard>
             </PokemonDetailCard>
             {showGallery && <PokemonPhotosGallery sprites={currPokemon.sprites} name={currPokemon.name}/>}
-        </div>
+        </PokemonDetailContainer>
+            </>
     )
 }
 

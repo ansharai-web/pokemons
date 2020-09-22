@@ -25,7 +25,37 @@ const PokemonPhotos = styled.section`
     width: 100%;
     height: 100%;
     }
-  
+  @media (min-width: 320px) and (max-width:450px){
+width:100%;
+  height:auto;
+display: flex;
+flex-direction: column;
+   margin-left:0px;
+}
+  @media (min-width: 768px) and (max-width:800px){
+    width: 95%;
+    height: 330px;
+    margin: auto;
+    /* margin-left: 0px; */
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+`
+
+const ImageContainer = styled.div`
+width: 150px;
+ height: 70px;
+  margin: 5px;
+    @media (min-width: 320px) and (max-width:450px){
+width:100%;
+}
+  @media (min-width: 768px) and (max-width:800px){
+  width: 30%;
+    height: 50%;
+    margin: 5px;
+  }
+
 `
 
 const PokemonPhotosGalleryFC: React.FC<IPokemonPhotosGalleryProps> = ({sprites, name }) => {
@@ -33,9 +63,9 @@ const PokemonPhotosGalleryFC: React.FC<IPokemonPhotosGalleryProps> = ({sprites, 
 
         <PokemonPhotos>
             {sprites.map((img: string, index: number) =>
-                <div style={{width: '150px', height: '70px', margin: '5px'}} key={`${name}_image_${index}`}>
+                <ImageContainer  key={`${name}_image_${index}`}>
                     <img src={img} alt={`${name}_image_${index}`}/>
-                </div>
+                </ImageContainer>
             )}
         </PokemonPhotos>
 
