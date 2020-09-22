@@ -5,7 +5,6 @@ import {Card} from './components/Card'
 import {LoadingCard} from './components/LoadingCard'
 import {useScroll} from '../../../utils'
 import {SearchPokemonInput} from './pokemon-detail/components/SearchPokemonInput'
-import styled from 'styled-components'
 import {ListContainer} from './styles/pokemon-list-styles'
 
 interface IPokemonListProps {
