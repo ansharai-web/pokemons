@@ -10,7 +10,7 @@ interface ISearchPokemonInputProps {
 const SearchContainer = styled.div`
 display: flex;
     justify-content: center;
-    margin-bottom: 1%;
+    margin-bottom: 4%;
     margin-top: 3%;
 `
 const SearchInput = styled.input`

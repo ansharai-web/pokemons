@@ -5,6 +5,7 @@ import {Card} from './components/Card'
 import {LoadingCard} from './components/LoadingCard'
 import {useScroll} from '../../../utils'
 import {SearchPokemonInput} from './pokemon-detail/components/SearchPokemonInput'
+import styled from 'styled-components'
 
 interface IPokemonListProps {
     loading: boolean
@@ -28,18 +29,85 @@ const PokemonListFC: React.FC<IPokemonListProps> = ({loading, errored}) => {
     const cardList = pokemonList.slice(0, currentItemesNumber).map((pokemon, index) => <Card key={index} {...pokemon}/>)
     const notFoundOrError = <h3>{errored ? errorMessage : noItemsFoundMessage}</h3>
 
+    const ListContainer = styled.div`
 
+width: 70%;
+display: flex;
+flex-wrap: wrap;
+justify-content:center;
+margin: auto;
+    
+@media  (min-width:280px) and (max-width: 420px){
+width: 95%;
+margin: auto;
+    display: flex ;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+@media (min-width: 500px) and (max-width: 760px) {
+width: 97%;
+    display: flex ;
+    flex-wrap: wrap;
+    margin: auto;
+
+}
+@media (min-width:760px) and (max-width:1024px){
+width: 95%;
+margin: auto;
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+@media (min-width:1024px) and (max-width:1080px){
+  width: 100%;
+  margin:auto;  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+@media (min-width:1080px) and (max-width:1366px){
+width: 95%;
+display: flex;
+flex-wrap: wrap;
+margin:auto;
+justify-content: center;
+}
+@media (min-width:1366px) and (max-width:1442px){
+width: 90%;
+display: flex;
+flex-wrap: wrap;
+justify-content:center;
+margin: auto;
+}
+@media (min-width:1442px) and (max-width:1624px){
+width: 80%;
+display: flex;
+flex-wrap: wrap;
+justify-content:center;
+margin: auto;
+}
+@media (min-width:1858px){
+width: 60%;
+display: flex;
+flex-wrap: wrap;
+justify-content:center;
+margin: auto;
+}
+
+`
     return (
         <div>
             <SearchPokemonInput/>
 
-            <div style={{display: 'flex', flexWrap: 'wrap', width: '1200px', margin: 'auto'}}>
+            <ListContainer>
 
                 {
                     loading ?
                         loadingCardList : pokemonList.length > 0 ?
                         cardList : notFoundOrError}
-            </div>
+            </ListContainer>
 
 
         </div>
