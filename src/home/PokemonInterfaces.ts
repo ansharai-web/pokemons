@@ -99,7 +99,7 @@ export interface IPokemonTypes {
     }
 }
 
-//todo Create new file with all the interfaces with pokemons
+// todo Create new file with all the interfaces with pokemons
 export interface IPokemon {
     name: string,
     url: string
