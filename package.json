@@ -23,11 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "serve:build": "serve -s build -l 4000",
-    "build:serve":"concurrently \"yarn build\" \" yarn serve:build\"",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build:serve"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
