@@ -1,6 +1,5 @@
-import {useEffect, useState} from 'react'
 import * as React from 'react'
-import {IPartialPokemonDetails} from './redux/pokemonDetail.reducers'
+import {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 
 interface IMissingPokemon {

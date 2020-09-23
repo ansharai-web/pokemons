@@ -2,8 +2,6 @@ import * as React from 'react'
 import styled, {keyframes} from 'styled-components'
 import Pokemon_Ball from '../../../../assets/img/pokemon_ball.png'
 import {Link} from 'react-router-dom'
-import {savePokemonDetailAction} from '../pokemon-detail/redux/pokemonDetail.actions'
-import {useDispatch} from 'react-redux'
 import {useFetchPokemonDetail} from './fetch-pokemon-detail'
 
 const Filledbar = styled.div`

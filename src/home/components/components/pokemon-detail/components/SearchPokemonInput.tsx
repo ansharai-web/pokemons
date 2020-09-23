@@ -1,6 +1,6 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import {ChangeEvent} from 'react'
+import styled from 'styled-components'
 import {searchPokemonAction} from '../../../../redux/home.actions'
 import {useDispatch} from 'react-redux'
 

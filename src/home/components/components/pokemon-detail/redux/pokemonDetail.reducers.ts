@@ -2,12 +2,7 @@ import {SAVE_POKEMON_DETAIL} from './pokemonDetail.actions'
 import {IAction} from '../../../../../reducers'
 import {createSelector} from 'reselect'
 import {homeBaseSelector} from '../../../../redux/home.reducers'
-import {
-    IPokemonDetail,
-    IPokemonSpirites,
-    IPokemonStats,
-    IPokemonTypes
-} from '../../../../PokemonInterfaces'
+import {IPokemonDetail, IPokemonSpirites, IPokemonStats, IPokemonTypes} from '../../../../PokemonInterfaces'
 
 export interface IPartialPokemonDetails {
     name: string
