@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Missing Features:
+--This project is not fully responsive.<br /> 
+-- The pokemon detail should have a loading and a error state.<br /> 
+--I am a bad designer so the project could look better.<br /> 
+-- Often  I forget to put ; because habits.<br /> 
+-- There are some inconsistencies  when used the styled components, some of the components have the styles in the same file and others in a directory called styles.<br /> 
 ## Available Scripts
 
 In the project directory, you can run:

@@ -1,0 +1,7 @@
+import {IPokemon} from '../PokemonInterfaces'
+
+export const FETCH_POKEMONS = 'FETCH_POKEMONS';
+export const fetchPokemonsAction = (pokemons: IPokemon[]) => ({type:FETCH_POKEMONS, payload: pokemons})
+
+export const SEARCH_POKEMON = 'SEARCH_POKEMON';
+export const searchPokemonAction = (pokemonName: string) => ({type: SEARCH_POKEMON, payload:pokemonName})
